@@ -33,7 +33,7 @@ print(video_metadata)
 
 # Perform pose estimation
 pose = load_holistic(frames, fps=fps, width=width, height=height, depth=width, progress=True, 
-    model_complexity=2, refine_face_landmarks=True)
+    additional_holistic_config={'model_complexity': 2, 'refine_face_landmarks': True})
 
 # Write 
 with open(output, "wb") as f:
@@ -49,6 +49,7 @@ print(vars(pose.header))
 print(pose.body.data.shape)
 
 # Visualize
-v = PoseVisualizer(pose, thickness=1)
+p = pose.get_components(["POSE_LANDMARKS", "FACE_LANDMARKS", "LEFT_HAND_LANDMARKS", "RIGHT_HAND_LANDMARKS"])
+v = PoseVisualizer(p, thickness=1)
 v.save_video("pose.mp4", v.draw(max_frames=3000))
 v.save_video("pose_on_video.mp4", v.draw_on_video(path, max_frames=3000))
