@@ -13,5 +13,6 @@ file_paths = Path(data_path).rglob('*.mp4')
 
 for i, file_path in enumerate(file_paths):
     print('Processing file {} ...'.format(file_path))
-    output = str(file_path).split('.')[0] + '.pose'
-    pose_estimate(str(file_path), output, i == 0)
+    prefix_name = '.'.join(str(file_path).split('.')[:-1])
+    output = prefix_name + '.pose'
+    pose_estimate(str(file_path), output, True)

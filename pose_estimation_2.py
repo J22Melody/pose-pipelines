@@ -15,11 +15,11 @@ def load_video_frames(cap: cv2.VideoCapture):
         yield cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     cap.release()
 
-def pose_visualize(pose, video_path):
+def pose_visualize(pose, output, video_path):
     p = pose.get_components(["POSE_LANDMARKS", "FACE_LANDMARKS", "LEFT_HAND_LANDMARKS", "RIGHT_HAND_LANDMARKS"])
     v = PoseVisualizer(p, thickness=1)
-    v.save_video("pose.mp4", v.draw(max_frames=3000))
-    v.save_video("pose_on_video.mp4", v.draw_on_video(video_path, max_frames=3000))
+    v.save_video("{}.mp4".format(output), v.draw())
+    v.save_video("{}.overlay.mp4".format(output), v.draw_on_video(video_path))
 
 def pose_estimate(path, output, visualize=False):
     # Load video frames
@@ -48,7 +48,7 @@ def pose_estimate(path, output, visualize=False):
 
     # Visualize
     if visualize:
-        pose_visualize(pose, path)
+        pose_visualize(pose, output, path)
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
