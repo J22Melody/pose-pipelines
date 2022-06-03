@@ -24,15 +24,15 @@ def pose_visualize(pose, output, video_path):
         {"FACE_LANDMARKS": FACEMESH_CONTOURS_POINTS})
     print(p.body.data.shape)
     v = PoseVisualizer(p, thickness=1)
-    v.save_video("{}.mp4".format(output), v.draw())
-    v.save_video("{}.overlay.mp4".format(output), v.draw_on_video(video_path))
+    v.save_video("{}.reduced.mp4".format(output), v.draw())
+    v.save_video("{}.overlay.reduced.mp4".format(output), v.draw_on_video(video_path))
 
 def pose_estimate(path, output, visualize=False):
     # # Load video frames
     # cap = cv2.VideoCapture(path)
     # width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     # height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    # fps = int(cap.get(cv2.CAP_PROP_FPS))
+    # fps = cap.get(cv2.CAP_PROP_FPS)
     # frames = load_video_frames(cap)
     # video_metadata = dict(fps=fps, width=width, height=height)
     # print(video_metadata)
