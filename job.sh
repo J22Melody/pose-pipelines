@@ -6,7 +6,7 @@
 
 
 #SBATCH --job-name=baseline  	## job name
-#SBATCH --time=0-72:00:00       ## days-hours:minutes:seconds
+#SBATCH --time=7-00:00:00       ## days-hours:minutes:seconds
 ###SBATCH --mem=4000M             ##   3GB ram (hardware ratio is < 4GB/core)
 
 ### SBATCH --output=job.out	## standard out file
@@ -20,6 +20,6 @@
 # module load nvidia/cuda11.2-cudnn8.1.0
 module load anaconda3
 source activate pose
-# pip install -r requirements.txt
+pip install -r requirements.txt
 
 stdbuf -o0 -e0 srun --unbuffered python process_smile_2.py $1

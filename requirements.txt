@@ -21,7 +21,7 @@ packaging==21.3
 Pillow==9.1.0
 platformdirs==2.4.0
 pluggy==1.0.0
-pose-format @ git+https://github.com/AmitMY/pose-format.git@097ac93f01b4e337b7e1ab6341690be57c2fce84
+pose-format @ git+https://github.com/J22Melody/pose-format.git@tolerance
 protobuf==3.20.1
 py==1.11.0
 pyparsing==3.0.8
