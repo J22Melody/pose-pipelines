@@ -23,6 +23,8 @@ def pose_visualize(pose, output, video_path):
     p = pose.get_components(["POSE_LANDMARKS", "FACE_LANDMARKS", "LEFT_HAND_LANDMARKS", "RIGHT_HAND_LANDMARKS"], 
         {"FACE_LANDMARKS": FACEMESH_CONTOURS_POINTS})
     print(p.body.data.shape)
+    with open('./example.reduced.pose', "wb") as f:
+        p.write(f)
     v = PoseVisualizer(p, thickness=1)
     v.save_video("{}.reduced.mp4".format(output), v.draw())
     v.save_video("{}.overlay.reduced.mp4".format(output), v.draw_on_video(video_path))
