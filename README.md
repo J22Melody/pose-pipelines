@@ -1,9 +1,27 @@
 # pose-pipelines
 
-From Sarah's email:
+### Requirements
 
->  The aim would be for us to set up a pose extraction pipeline ourselves so that we don’t need to rely as much on our colleagues in Surrey anymore in the future. Apart from OpenPose and Holistic, Monocular Total Capture (Xiang et al., 2018) and FrankMoCap (Rong et al., 2021) may also be alternatives. Our colleagues at Surrey ultimately trained a HRNet (J. Wang et al., 2020) model and fine-tuned it on sign language data. 
+Install MediaPipe:
+https://google.github.io/mediapipe/getting_started/python.html
 
-First step, run Holistic pipelines as Surrey does:
+Install other dependencies:
+`pip install pose-format`
 
-> Specifically for the data that we are providing to Emma for her Master’s thesis study (i.e., the data that Alessia sent you on which you will run Holistic) we should make sure to apply the same Holistic settings so that the output is comparable. 
+### Cropping
+
+### Masking
+
+### Pose estimation
+
+Apart from OpenPose and Holistic, Monocular Total Capture (Xiang et al., 2018) and FrankMoCap (Rong et al., 2021) may also be alternatives. Our colleagues at Surrey ultimately trained a HRNet (J. Wang et al., 2020) model and fine-tuned it on sign language data. 
+
+`python pose_estimation.py example.mp4 example.pose`
+
+### Links
+
+- Example Pose Format:
+https://colab.research.google.com/drive/1-KVOmJalbmKzpZYST2qnEZ7L3J9uj8uR?usp=sharing
+https://colab.research.google.com/drive/14FWXViVTYEIRFb4s9TpNXRiIJ6Xtfykc?usp=sharing
+- MediaPipe Holistic:
+https://google.github.io/mediapipe/solutions/holistic.html
