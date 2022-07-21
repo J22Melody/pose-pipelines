@@ -79,10 +79,10 @@ if __name__ == "__main__":
     video_path = sys.argv[1]
     output_path = sys.argv[2]
 
-    # pose_estimate(video_path, output_path, reduce=False)
-    # pose_visualize(video_path, output_path, overlay=True)
-    # pose_visualize(video_path, output_path, overlay=False)
-
-    pose_estimate(video_path, output_path, lib='openpose', reduce=False)
+    pose_estimate(video_path, output_path, reduce=False)
     pose_visualize(video_path, output_path, overlay=True)
     pose_visualize(video_path, output_path, overlay=False)
+
+    # pose_estimate(video_path, output_path, lib='openpose', reduce=False)
+    # pose_visualize(video_path, output_path, overlay=True)
+    # pose_visualize(video_path, output_path, overlay=False)

@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
+FROM --platform=linux/amd64 nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
 
 RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install sudo git wget build-essential -y
