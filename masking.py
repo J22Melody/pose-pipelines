@@ -33,7 +33,7 @@ def save_video(f_name: str, frames: Iterator, custom_ffmpeg=None):
 def mask_video(video_path, output_path):
     cap = cv2.VideoCapture(video_path)
     output_images = []
-    with mp_selfie_segmentation.SelfieSegmentation(model_selection=0) as selfie_segmentation:
+    with mp_selfie_segmentation.SelfieSegmentation(model_selection=1) as selfie_segmentation:
         bg_image = None
         while True:
             success, image = cap.read()
