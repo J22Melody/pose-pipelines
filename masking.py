@@ -12,27 +12,19 @@ mp_selfie_segmentation = mp.solutions.selfie_segmentation
 
 BG_COLOR = (192, 192, 192) # gray
 
-def save_video(f_name: str, frames: Iterator, custom_ffmpeg=None):
-    # image_size = (self.pose.header.dimensions.width, self.pose.header.dimensions.height)
+def mask_video(video_path, output_path):
+    
+    cap = cv2.VideoCapture(video_path)
+    fps, frames = cap.get(cv2.CAP_PROP_FPS), cap.get(cv2.CAP_PROP_FRAME_COUNT)
 
     output_params = {
       "-vcodec": "libx264",
       "-crf": 0,
       "-preset": "fast",
-      "-input_framerate": 25,
+      "-input_framerate": fps
     }
+    out = WriteGear(output_filename=output_path, logging=False, custom_ffmpeg=None, **output_params)
 
-    # Define writer with defined parameters and suitable output filename for e.g. `Output.mp4`
-    out = WriteGear(output_filename=f_name, logging=False, custom_ffmpeg=custom_ffmpeg, **output_params)
-    # out = cv2.VideoWriter(f_name, cv2.VideoWriter_fourcc(*'MP4V'), self.pose.body.fps, image_size)
-    for frame in tqdm(frames):
-      out.write(frame)
-
-    out.close()
-
-def mask_video(video_path, output_path):
-    cap = cv2.VideoCapture(video_path)
-    output_images = []
     with mp_selfie_segmentation.SelfieSegmentation(model_selection=1) as selfie_segmentation:
         bg_image = None
         while True:
@@ -68,11 +60,10 @@ def mask_video(video_path, output_path):
                 bg_image[:] = BG_COLOR
             output_image = np.where(condition, image, bg_image)
 
-            output_images.append(output_image)
+            out.write(output_image)
 
+    out.close()
     cap.release()
-
-    save_video(output_path, output_images)
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
