@@ -22,4 +22,4 @@ module load anaconda3
 source activate pose
 pip install -r requirements.txt
 
-stdbuf -o0 -e0 srun --unbuffered python process_smile_2.py $1
+stdbuf -o0 -e0 srun --unbuffered python pose_estimation_batch.py $1
