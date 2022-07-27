@@ -5,7 +5,7 @@ import numpy as np
 import mediapipe as mp
 from pose_format import Pose
 from pose_format.utils.holistic import load_holistic
-from pose_format.utils.openpose import load_openpose, load_openpose_directory
+from pose_format.utils.openpose import load_openpose_directory
 from pose_format.pose_visualizer import PoseVisualizer
 
 
@@ -78,11 +78,8 @@ if __name__ == "__main__":
 
     video_path = sys.argv[1]
     output_path = sys.argv[2]
+    lib = sys.argv[3] if len(sys.argv) > 3 else 'mediapipe'
 
-    pose_estimate(video_path, output_path, reduce=False)
+    pose_estimate(video_path, output_path, reduce=False, lib=lib)
     pose_visualize(video_path, output_path, overlay=True)
     pose_visualize(video_path, output_path, overlay=False)
-
-    # pose_estimate(video_path, output_path, lib='openpose')
-    # pose_visualize(video_path, output_path, overlay=True)
-    # pose_visualize(video_path, output_path, overlay=False)
