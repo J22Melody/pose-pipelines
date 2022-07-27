@@ -5,7 +5,7 @@ import numpy as np
 import mediapipe as mp
 from pose_format import Pose
 from pose_format.utils.holistic import load_holistic
-from pose_format.utils.openpose import load_openpose
+from pose_format.utils.openpose import load_openpose, load_openpose_directory
 from pose_format.pose_visualizer import PoseVisualizer
 
 
@@ -46,7 +46,7 @@ def pose_estimate(video_path, output_path, lib='mediapipe', reduce=False):
             pose = pose.get_components(["POSE_LANDMARKS", "FACE_LANDMARKS", "LEFT_HAND_LANDMARKS", "RIGHT_HAND_LANDMARKS"], 
                 {"FACE_LANDMARKS": FACEMESH_CONTOURS_POINTS})
     elif lib == 'openpose':
-        pose = load_openpose(frames, fps=fps, width=width, height=height)
+        pose = load_openpose_directory(video_path.replace('.mp4', '.openpose'), fps=fps, width=width, height=height)
 
     print('Points:', pose.body.data.shape)
 
@@ -83,6 +83,6 @@ if __name__ == "__main__":
     pose_visualize(video_path, output_path, overlay=True)
     pose_visualize(video_path, output_path, overlay=False)
 
-    # pose_estimate(video_path, output_path, lib='openpose', reduce=False)
+    # pose_estimate(video_path, output_path, lib='openpose')
     # pose_visualize(video_path, output_path, overlay=True)
     # pose_visualize(video_path, output_path, overlay=False)

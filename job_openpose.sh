@@ -27,4 +27,5 @@ srun singularity exec \
 --nv \
 --pwd /openpose/ \
 ~/data/openpose_latest \
-./build/examples/openpose/openpose.bin --video ~/pose-pipelines/example.mp4 --write_json ~/pose-pipelines/example.openpose/ --write_video ~/pose-pipelines/example.openpose.avi --display 0 --face --hand --render_pose 1
+./build/examples/openpose/openpose.bin --video ~/pose-pipelines/example.mp4 --write_json ~/pose-pipelines/example.openpose/ --display 0 --face --hand --render_pose 0
+# ./build/examples/openpose/openpose.bin --video ~/pose-pipelines/example.mp4 --write_json ~/pose-pipelines/example.openpose/ --write_video ~/pose-pipelines/example.openpose.avi --display 0 --face --hand --render_pose 1
