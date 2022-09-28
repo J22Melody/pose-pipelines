@@ -19,7 +19,7 @@ def mask_video(video_path, output_path):
 
     output_params = {
       "-vcodec": "libx264",
-      "-crf": 0,
+      "-crf": 18,
       "-preset": "fast",
       "-input_framerate": fps
     }

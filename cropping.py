@@ -23,7 +23,7 @@ def crop_video(video_path, output_path, x=0, y=0, h=720, w=640):
 
     output_params = {
       "-vcodec": "libx264",
-      "-crf": 0,
+      "-crf": 18,
       "-preset": "fast",
       "-input_framerate": fps,
     }
@@ -44,8 +44,9 @@ def crop_video(video_path, output_path, x=0, y=0, h=720, w=640):
             crop_frame = frame[y:y+h, x:x+w]
 
             # Percentage
-            xx = cnt *100/frames
-            # print(int(xx),'%')
+            if cnt % 100 == 0:
+                xx = cnt *100/frames
+                print(int(xx),'%')
 
             # Saving from the desired frames
             #if 15 <= cnt <= 90:
