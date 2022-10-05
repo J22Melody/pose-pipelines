@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 from vidgear.gears import WriteGear
 
-def crop_video(video_path, output_path, x=0, y=0, h=720, w=640):
+def crop_video(video_path, output_path, x=100, y=0, h=1024, w=1024):
     # Open the video
     cap = cv2.VideoCapture(video_path)
 
