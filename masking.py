@@ -21,7 +21,8 @@ def mask_video(video_path, output_path):
       "-vcodec": "libx264",
       "-crf": 18,
       "-preset": "fast",
-      "-input_framerate": fps
+      "-input_framerate": fps,
+      "-pix_fmt": "yuv420p",
     }
     out = WriteGear(output_filename=output_path, logging=False, custom_ffmpeg=None, **output_params)
 

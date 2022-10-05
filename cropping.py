@@ -26,6 +26,7 @@ def crop_video(video_path, output_path, x=0, y=0, h=720, w=640):
       "-crf": 18,
       "-preset": "fast",
       "-input_framerate": fps,
+      "-pix_fmt": "yuv420p",
     }
 
     # Define writer with defined parameters and suitable output filename for e.g. `Output.mp4`
