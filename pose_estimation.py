@@ -26,7 +26,7 @@ def pose_estimate(video_path, output_path, lib='mediapipe', reduce=False):
     cap = cv2.VideoCapture(video_path)
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    fps = int(cap.get(cv2.CAP_PROP_FPS))
+    fps = round(cap.get(cv2.CAP_PROP_FPS))
     frames = load_video_frames(cap)
     video_metadata = dict(fps=fps, width=width, height=height)
     print(video_metadata)
