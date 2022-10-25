@@ -26,7 +26,7 @@ def mask_video(video_path, output_path):
     }
     out = WriteGear(output_filename=output_path, logging=False, custom_ffmpeg=None, **output_params)
 
-    with mp_selfie_segmentation.SelfieSegmentation(model_selection=1) as selfie_segmentation:
+    with mp_selfie_segmentation.SelfieSegmentation(model_selection=0) as selfie_segmentation:
         bg_image = None
         while True:
             success, image = cap.read()
@@ -39,6 +39,7 @@ def mask_video(video_path, output_path):
             # Flip the image horizontally for a later selfie-view display, and convert
             # the BGR image to RGB.
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
             # To improve performance, optionally mark the image as not writeable to
             # pass by reference.
             image.flags.writeable = False
@@ -50,7 +51,9 @@ def mask_video(video_path, output_path):
             # Draw selfie segmentation on the background image.
             # To improve segmentation around boundaries, consider applying a joint
             # bilateral filter to "results.segmentation_mask" with "image".
-            condition = np.stack((results.segmentation_mask,) * 3, axis=-1) > 0.05
+            segmentation_mask = results.segmentation_mask
+            segmentation_mask = cv2.ximgproc.jointBilateralFilter(image.astype(np.float32), results.segmentation_mask, 10, 75, 75)
+            condition = np.stack((segmentation_mask,) * 3, axis=-1) > 0.5
             # The background can be customized.
             #   a) Load an image (with the same width and height of the input image) to
             #      be the background, e.g., bg_image = cv2.imread('/path/to/image/file')
