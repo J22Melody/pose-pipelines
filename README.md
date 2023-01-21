@@ -37,7 +37,7 @@ We offer a container solution on S3IT:
 
 `cd ~/data/`
 
-`singularity pull docker://exsidius/openpose`
+`singularity pull docker://cwaffles/openpose`
 
 `singularity build --sandbox openpose_latest openpose_latest.sif`
 

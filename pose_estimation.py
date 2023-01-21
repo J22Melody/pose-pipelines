@@ -67,8 +67,10 @@ def pose_visualize(video_path, pose_path, overlay=False):
 
     # Write
     if overlay:
+        print("{}.overlay.mp4".format(pose_path))
         v.save_video("{}.overlay.mp4".format(pose_path), v.draw_on_video(video_path))
     else:
+        print("{}.mp4".format(pose_path))
         v.save_video("{}.mp4".format(pose_path), v.draw())
 
 if __name__ == "__main__":
@@ -80,6 +82,6 @@ if __name__ == "__main__":
     output_path = sys.argv[2]
     lib = sys.argv[3] if len(sys.argv) > 3 else 'mediapipe'
 
-    pose_estimate(video_path, output_path, reduce=True, lib=lib)
+    pose_estimate(video_path, output_path, reduce=False, lib=lib)
     pose_visualize(video_path, output_path, overlay=True)
-    pose_visualize(video_path, output_path, overlay=False)
+    # pose_visualize(video_path, output_path, overlay=False)

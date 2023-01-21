@@ -6,8 +6,8 @@
 
 
 #SBATCH --job-name=baseline  	## job name
-#SBATCH --time=7-00:00:00       ## days-hours:minutes:seconds
-###SBATCH --mem=4000M             ##   3GB ram (hardware ratio is < 4GB/core)
+#SBATCH --time=0-20:00:00       ## days-hours:minutes:seconds
+###SBATCH --mem=4000            ##   3GB ram (hardware ratio is < 4GB/core)
 
 ### SBATCH --output=job.out	## standard out file
 #SBATCH --ntasks=1            ## Ntasks.  default is 1.
@@ -15,11 +15,8 @@
 ###SBATCH --partition=generic  ##  can specify partition here, but it is pre-empted by what module is loaded
 ###SBATCH --account=your_tenant_name    ## only need to specify if you belong to multiple tenants on ScienceCluster
 ###SBATCH --gres gpu:1
-###SBATCH --gres gpu:Tesla-V100-32GB:1
 
-# module load nvidia/cuda11.2-cudnn8.1.0
 module load anaconda3
 source activate pose
-pip install -r requirements.txt
 
-stdbuf -o0 -e0 srun --unbuffered python pose_estimation_batch.py $1
+srun $@
