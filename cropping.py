@@ -3,7 +3,8 @@ import numpy as np
 import cv2
 from vidgear.gears import WriteGear
 
-def crop_video(video_path, output_path, x=100, y=0, h=1024, w=1024):
+
+def crop_video(video_path, output_path, x=0, y=0, w=1024, h=1024):
     # Open the video
     cap = cv2.VideoCapture(video_path)
 
@@ -11,15 +12,7 @@ def crop_video(video_path, output_path, x=100, y=0, h=1024, w=1024):
     cnt = 0
 
     # Some characteristics from the original video
-    w_frame, h_frame = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fps, frames = cap.get(cv2.CAP_PROP_FPS), cap.get(cv2.CAP_PROP_FRAME_COUNT)
-
-    # Here you can define your croping values
-    # x,y,h,w = 0,0,720,640
-
-    # output
-    # fourcc = cv2.VideoWriter_fourcc(*'MP4V')
-    # out = cv2.VideoWriter(output_path, fourcc, fps, (w, h))
 
     output_params = {
       "-vcodec": "libx264",
@@ -40,7 +33,7 @@ def crop_video(video_path, output_path, x=100, y=0, h=1024, w=1024):
         cnt += 1 # Counting frames
 
         # Avoid problems when video finish
-        if ret==True:
+        if ret:
             # Croping the frame
             crop_frame = frame[y:y+h, x:x+w]
 
@@ -62,7 +55,6 @@ def crop_video(video_path, output_path, x=100, y=0, h=1024, w=1024):
         else:
             break
 
-
     cap.release()
     out.close()
     cv2.destroyAllWindows()
@@ -75,4 +67,11 @@ if __name__ == "__main__":
     video_path = sys.argv[1]
     output_path = sys.argv[2]
 
-    crop_video(video_path, output_path)
+    if len(sys.argv) > 6:
+        x = int(sys.argv[3])
+        y = int(sys.argv[4])
+        w = int(sys.argv[5])
+        h = int(sys.argv[6])
+        crop_video(video_path, output_path, x, y, w, h)
+    else:
+        crop_video(video_path, output_path)

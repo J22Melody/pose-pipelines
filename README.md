@@ -1,10 +1,12 @@
 # pose-pipelines
 
-Pipelines to process sign language videos like the way described in WMT-SLT 22: 
+Pipelines to process (crop, mask, and estimate poses) sign language videos like the way described in WMT-SLT 22: 
 
 https://www.wmt-slt.com/data#h.23ktnxrb3yhc
 
 ### Requirements
+
+Python 3.8.11 (a virtual Python environment is recommended)
 
 Install MediaPipe:
 https://google.github.io/mediapipe/getting_started/python.html
@@ -15,11 +17,11 @@ Install other dependencies:
 ### Example Video Files
 
 - example.mp4: already cropped and masked video
-- example_2.mp4: original video
+- example_2.mp4: raw video from TV show
 
 ### Cropping
 
-`python cropping.py example_2.mp4 example_2.cropped.mp4`
+`python cropping.py example_2.mp4 example_2.cropped.mp4 100 0 400 1000`
 
 ### Masking
 
