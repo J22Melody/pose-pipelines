@@ -58,3 +58,14 @@ Finally, read the Openpose output files and write them to a `.pose` file:
 https://google.github.io/mediapipe/solutions/holistic.html
 - Openpose:
 https://cmu-perceptual-computing-lab.github.io/openpose/web/html/doc/md_doc_installation_0_index.html
+
+### Citation
+
+```
+@misc{jiang2022pose-pipelines, 
+    title={pose-pipelines: Pipelines to process sign language videos like the way described in WMT-SLT 22},
+    author={Jiang, Zifan},
+    howpublished={\url{https://github.com/J22Melody/pose-pipelines}},
+    year={2022}
+}
+```
