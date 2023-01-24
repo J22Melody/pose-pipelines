@@ -35,7 +35,7 @@ Install other dependencies:
 
 Pose estimation by Openpose requires a specific environment setup that is more complicated than simply installing and calling a Python library.
 
-We offer a container solution on S3IT:
+We offer a container solution (on S3IT):
 
 `cd ~/data/`
 
