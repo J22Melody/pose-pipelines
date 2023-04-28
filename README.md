@@ -12,7 +12,10 @@ Install MediaPipe:
 https://google.github.io/mediapipe/getting_started/python.html
 
 Install other dependencies:
-`pip install pose-format` (the library we use to store `.pose` files)
+
+`pip install pose-format` (the library we use to store `.pose` files) 
+
+`pip install vidgear`
 
 ### Example Video Files
 
