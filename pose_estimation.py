@@ -81,8 +81,10 @@ if __name__ == "__main__":
     video_path = sys.argv[1]
     output_path = sys.argv[2]
     lib = sys.argv[3] if len(sys.argv) > 3 else 'mediapipe'
-    reduce = True if len(sys.argv) > 4 else False
+    visualize = True if len(sys.argv) > 4 else False
+    reduce = True if len(sys.argv) > 5 else False
 
     pose_estimate(video_path, output_path, reduce=reduce, lib=lib)
-    pose_visualize(video_path, output_path, overlay=True)
-    pose_visualize(video_path, output_path, overlay=False)
+    if visualize:
+        pose_visualize(video_path, output_path, overlay=True)
+        pose_visualize(video_path, output_path, overlay=False)
