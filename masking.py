@@ -24,7 +24,7 @@ def mask_video(video_path, output_path):
       "-input_framerate": fps,
       "-pix_fmt": "yuv420p",
     }
-    out = WriteGear(output_filename=output_path, logging=False, custom_ffmpeg=None, **output_params)
+    out = WriteGear(output=output_path, logging=False, custom_ffmpeg=None, **output_params)
 
     with mp_selfie_segmentation.SelfieSegmentation(model_selection=0) as selfie_segmentation:
         bg_image = None
