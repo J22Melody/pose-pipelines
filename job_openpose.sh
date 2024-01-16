@@ -19,14 +19,21 @@
 VIDEO=${1:-'/home/zifjia/pose-pipelines/example.mp4'}
 OUTPUT=${2:-'/home/zifjia/pose-pipelines/example.openpose/'}
 
-module load t4
-module load singularityce
-module load cudnn/7.6.5.32-10.2
+# module load t4
+# module load singularityce
+# module load cudnn/7.6.5.32-10.2
 
-srun singularity exec \
+# srun singularity exec \
+# -B /home/zifjia \
+# --nv \
+# --pwd /openpose/ \
+# ~/data/openpose_latest \
+# ./build/examples/openpose/openpose.bin --video $VIDEO --write_json $OUTPUT --display 0 --face --hand --render_pose 0
+# ./build/examples/openpose/openpose.bin --video ~/pose-pipelines/example.mp4 --write_json ~/pose-pipelines/example.openpose/ --write_video ~/pose-pipelines/example.openpose.avi --display 0 --face --hand --render_pose 1
+
+singularity exec \
 -B /home/zifjia \
 --nv \
 --pwd /openpose/ \
 ~/data/openpose_latest \
 ./build/examples/openpose/openpose.bin --video $VIDEO --write_json $OUTPUT --display 0 --face --hand --render_pose 0
-# ./build/examples/openpose/openpose.bin --video ~/pose-pipelines/example.mp4 --write_json ~/pose-pipelines/example.openpose/ --write_video ~/pose-pipelines/example.openpose.avi --display 0 --face --hand --render_pose 1

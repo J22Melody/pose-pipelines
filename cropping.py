@@ -23,7 +23,7 @@ def crop_video(video_path, output_path, x=0, y=0, w=1024, h=1024):
     }
 
     # Define writer with defined parameters and suitable output filename for e.g. `Output.mp4`
-    out = WriteGear(output_filename=output_path, logging=False, custom_ffmpeg=None, **output_params)
+    out = WriteGear(output=output_path, logging=False, custom_ffmpeg=None, **output_params)
 
 
     # Now we start

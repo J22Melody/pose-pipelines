@@ -20,7 +20,7 @@ def load_video_frames(cap: cv2.VideoCapture):
         yield cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     cap.release()
 
-def pose_estimate(video_path, output_path, lib='mediapipe', reduce=False):
+def pose_estimate(video_path, output_path, lib='mediapipe', reduce=False, openpose_dir=None):
     # Load video frames
     print('Load video ...')
     cap = cv2.VideoCapture(video_path)
@@ -35,8 +35,9 @@ def pose_estimate(video_path, output_path, lib='mediapipe', reduce=False):
     print('Estimating pose ...')
 
     if lib == 'mediapipe':
-        pose = load_holistic(frames, fps=fps, width=width, height=height, progress=True, 
-            additional_holistic_config={'model_complexity': 2, 'refine_face_landmarks': True})
+        # pose = load_holistic(frames, fps=fps, width=width, height=height, progress=True, 
+        #     additional_holistic_config={'model_complexity': 2, 'refine_face_landmarks': True})
+        pose = load_holistic(frames, fps=fps, width=width, height=height, depth=width, progress=True)
 
         # Remove world landmarks by default
         pose = pose.get_components(["POSE_LANDMARKS", "FACE_LANDMARKS", "LEFT_HAND_LANDMARKS", "RIGHT_HAND_LANDMARKS"])
@@ -46,7 +47,7 @@ def pose_estimate(video_path, output_path, lib='mediapipe', reduce=False):
             pose = pose.get_components(["POSE_LANDMARKS", "FACE_LANDMARKS", "LEFT_HAND_LANDMARKS", "RIGHT_HAND_LANDMARKS"], 
                 {"FACE_LANDMARKS": FACEMESH_CONTOURS_POINTS})
     elif lib == 'openpose':
-        pose = load_openpose_directory(video_path.replace('.mp4', '.openpose'), fps=fps, width=width, height=height)
+        pose = load_openpose_directory(openpose_dir if openpose_dir else video_path.replace('.mp4', '.openpose'), fps=fps, width=width, height=height)
 
     print('Points:', pose.body.data.shape)
 
@@ -78,13 +79,15 @@ if __name__ == "__main__":
         print('Please specify the video_path for the video and the output_path!')
         exit()
 
+    # TODO: argparse
     video_path = sys.argv[1]
     output_path = sys.argv[2]
     lib = sys.argv[3] if len(sys.argv) > 3 else 'mediapipe'
-    visualize = True if len(sys.argv) > 4 else False
-    reduce = True if len(sys.argv) > 5 else False
+    openpose_dir = sys.argv[4] if len(sys.argv) > 4 else None
+    visualize = sys.argv[5] if len(sys.argv) > 5 else False
+    reduce = sys.argv[6] if len(sys.argv) > 6 else False
 
-    pose_estimate(video_path, output_path, reduce=reduce, lib=lib)
+    pose_estimate(video_path, output_path, reduce=reduce, lib=lib, openpose_dir=openpose_dir)
     if visualize:
         pose_visualize(video_path, output_path, overlay=True)
         pose_visualize(video_path, output_path, overlay=False)
