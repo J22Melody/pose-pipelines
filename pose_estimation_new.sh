@@ -11,11 +11,11 @@ for fullfile in "$input_directory"*.mp4; do
 
     output="$output_directory/$filename.pose"
 
-    if [ -e $output ]
+    if [ -e "$output" ]
     then
         echo "$output exists, skipping ..."
     else
         echo "video_to_pose -i $fullfile --format mediapipe -o $output"
-        video_to_pose -i $fullfile --format mediapipe -o $output
+        video_to_pose -i "$fullfile" --format mediapipe -o "$output"
     fi
 done
